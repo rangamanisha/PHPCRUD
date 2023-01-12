@@ -1,7 +1,9 @@
-<?php
+  <?php
 
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])){
-        $conn = mysqli_connect('localhost', 'root', '', 'test1') or die("Connection Failed:" .mysqli_connect_error());
+        $conn = mysqli_connect('localhost', 'root', 'root', 'test1') or die("Connection Failed:" .mysqli_connect_error());
+        
+
         if(isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['gender'])) {
             $firstname = $_POST['firstname'];
             $lastname = $_POST['lastname'];
@@ -23,4 +25,4 @@
         }
     }
 
-?>
+?> 
