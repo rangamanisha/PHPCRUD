@@ -3,13 +3,13 @@
  description: configuration of the database
 * update the username, database_name, password according to your config
 */
-    $servername = "localhost";
-    $username = "deadman";
+    $host = "localhost";
+    $user = "deadman";
     $password = "deadmanzone";
-    $database_name = "3bu1_views";
+    $db = "3bu1_views";
 
     try {
-        $conn = new PDO("mysql:host=$servername;dbname=$database_name", $username, $password);
+        $conn = new PDO("mysql:host=$host;dbname=$db", $user, $password);
         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
         echo "Connection failed: " . $e->getMessage();

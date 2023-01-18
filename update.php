@@ -23,20 +23,18 @@
           </div>";
         }
     }
-    if(isset($_GET['id'])){
-        $id = $_GET['id'];
-        $sql = "SELECT * from `users` WHERE `id` = `$id`";
+    if(isset($_GET['email'])){
+        $id = $_GET['email'];
+        $sql = "SELECT * from `users` WHERE email = :email limit 1";
         $res = $conn->prepare($sql);
+        $res -> bindParam(":email", $id);
         $res->execute();
-        $user_fetched = $res->fetchAll();
-        $res->setFetchMode(PDO::FETCH_ASSOC);
-        if(count($user_fetched) > 0) {
-            foreach ($user_fetched as $user) {
+        $user = $res->fetch(PDO::FETCH_ASSOC);
                 $fullname = $user["fullname"];
                 $id = $user["id"];
                 $username = $user["username"];
                 $email = $user["email"];
-            }
+            // }
             ?>
             <!doctype html>
             <html>
@@ -59,22 +57,22 @@
                             <fieldset>
                                 <legend>Important information</legend>
                                 <!-- hidden id input element only for the update sql operation -->
-                                <input id="email"  class="form-control" type="hidden" aria-describedby="email_help"value="<?php echo"$id"; ?>"/>
+                                <input id="id"  class="form-control" type="hidden" value="<?php echo"$id"; ?>"/>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Full name</label>
-                                    <input id="name" class="form-control" type="text" aria-describedby="firstname_help" value="<?php echo"$fullname";?>"/>
+                                    <input id="name" name="fullname" class="form-control" type="text" aria-describedby="firstname_help" value="<?php echo"$fullname";?>"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="username" class="form-label">Username</label>
-                                    <input id="username" class="form-control" type="text" aria-describedby="username_help"value="<?php echo"$username"; ?>"/>
+                                    <input id="username"  name="username" class="form-control" type="text" aria-describedby="username_help"value="<?php echo"$username"; ?>"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email</label>
-                                    <input id="email" class="form-control" type="email" aria-describedby="email_help"value="<?php "$email"; ?>"/>
+                                    <input id="email" name="email" class="form-control" type="email" aria-describedby="email_help"value="<?php echo"$email"; ?>"/>
                                 </div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">Update</button>
-                                    <button type="button" class="btn btn-info">Cancel</button>
+                                <div class="row">
+                                    <button type="submit" class="btn btn-success col m-3">Update</button>
+                                    <button type="button" class="btn btn-warning col m-3">Cancel</button>
                                 </div>
                             </fieldset>
                         </form>
@@ -85,8 +83,5 @@
                 </body>
             </html>
         <?php }
-        else {
-            header('Location: admin_view_users.php');
-        }
-    }
+    // }
     ?>
