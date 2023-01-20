@@ -4,6 +4,10 @@
      * description: view the registered users as a list
      */
 
+     require_once "session.php";
+     if(!isset($login_session)) {
+            header("location: admin_view_users.php");
+     }
      include "config.php";
      $sql = "SELECT * from users";
      $query = $conn->prepare($sql);

@@ -4,6 +4,7 @@
  * description: register a  new user
  */
     $pdo = require "connect.php";
+    $message="";
     if(isset($_POST["redirect_to_login"])){ 
         header("location: login.php");
     }
@@ -12,17 +13,20 @@
         $username = $_POST["username"];
         $email = $_POST["email"];
         $password = $_POST["password"];
+        if(empty($fullname) || empty($username) || empty($email)||empty($password)) {
+            $message = "<label class=\"text-danger\">"."All fields are required"."</label>";
+        }
         // query to database after submit button, insert the data
-        $sql = "insert into users(fullname, username, email, password) values(?,?,?,?)"; 
+        $sql = 'insert into users (fullname, username, email, password) values(?,?,?,?)';
         $result = $pdo->prepare($sql);
         $result->execute([$fullname, $username, $email, $password]);
         if($result == TRUE) {
-            header('Location: admin_view_users.php');
+            header('Location: login.php');
         }
         else {
-            echo "Error: " . $sql ."<br>".$conn->error;
+            $message = "<label class=\"text-danger\">"."Wrong data"."</label>";
+            $pdo=null;
         }
-        $conn->close();
     }
 ?>
 
