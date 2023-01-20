@@ -4,6 +4,9 @@
  * description: register a  new user
  */
     $pdo = require "connect.php";
+    if(isset($_POST["redirect_to_login"])){ 
+        header("location: login.php");
+    }
     if(isset($_POST['submit'])) {
         $fullname = $_POST["fullname"];
         $username = $_POST["username"];
@@ -31,9 +34,12 @@
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script type="text/javascript">
+   function login_redirect() {
+    console.log(window)
+   }
    function resetForm()
    {
-       var myForm = document.getElementById(register-form);
+       var myForm = document.getElementById("register-form");
 
        for (var i = 0; i < myForm.elements.length; i++)
        {
@@ -85,7 +91,7 @@
                 </div>
                 <div class="d-grid mt-3 row align-items-center">
                     <p>Already have an account?
-                        <button class="btn btn-link p-0">Login</button>
+                        <button type="submit" class="btn btn-link p-0" onclick="login_redirect()" name="redirect_to_login">Login</button>
                     </p>
                 </div>
             </fieldset>
