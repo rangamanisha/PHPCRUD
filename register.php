@@ -34,9 +34,6 @@
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <script type="text/javascript">
-   function login_redirect() {
-    console.log(window)
-   }
    function resetForm()
    {
        var myForm = document.getElementById("register-form");
@@ -91,7 +88,7 @@
                 </div>
                 <div class="d-grid mt-3 row align-items-center">
                     <p>Already have an account?
-                        <button type="submit" class="btn btn-link p-0" onclick="login_redirect()" name="redirect_to_login">Login</button>
+                        <button type="submit" class="btn btn-link p-0" name="redirect_to_login">Login</button>
                     </p>
                 </div>
             </fieldset>
