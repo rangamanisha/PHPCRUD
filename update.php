@@ -3,19 +3,20 @@
      * filename: update.php
      * description: updating a registered user as admin
      */
-    include "config.php";
+    $pdo = require "connect.php";
     if(isset($_POST["update"])){
         $fullname = $_POST["fullname"];
         $id = $_POST["id"];
         $username = $_POST["username"];
         $email = $_POST["email"];
-        $sql = "UPDATE `users` SET`fullname`=`$fullname`,`username`=`$username`,`email`=`$email` WHERE `id`=`$id`";
-        $result = $conn->prepare($sql);
+        $sql = "UPDATE `users` SET`fullname`= \"$fullname\",`username`=\"$username\",`email`=\"$email\" WHERE id=\"$id\"";
+        $result = $pdo->prepare($sql);
         $result->execute();
         if($result == TRUE){
             echo "<div class='alert alert-success' role='alert'>
             Record $username is updated successfully!
           </div>";
+        header("Location: admin_view_users.php");
         }
         else {
             echo "<div class='alert alert-danger' role='alert'>
@@ -57,7 +58,7 @@
                             <fieldset>
                                 <legend>Important information</legend>
                                 <!-- hidden id input element only for the update sql operation -->
-                                <input id="id"  class="form-control" type="hidden" value="<?php echo"$id"; ?>"/>
+                                <input id="id"  class="form-control" type="hidden" name="id" value="<?php echo"$id"; ?>"/>
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Full name</label>
                                     <input id="name" name="fullname" class="form-control" type="text" aria-describedby="firstname_help" value="<?php echo"$fullname";?>"/>
@@ -71,7 +72,7 @@
                                     <input id="email" name="email" class="form-control" type="email" aria-describedby="email_help"value="<?php echo"$email"; ?>"/>
                                 </div>
                                 <div class="row">
-                                    <button type="submit" class="btn btn-success col m-3">Update</button>
+                                    <button type="submit" class="btn btn-success col m-3" name="update">Update</button>
                                     <button type="button" class="btn btn-warning col m-3">Cancel</button>
                                 </div>
                             </fieldset>
