@@ -9,7 +9,7 @@
         $id = $_POST["id"];
         $username = $_POST["username"];
         $email = $_POST["email"];
-        $sql = "UPDATE `users` SET`fullname`= \"$fullname\",`username`=\"$username\",`email`=\"$email\" WHERE id=\"$id\"";
+        $sql = "UPDATE `listusers` SET`fullname`= \"$fullname\",`username`=\"$username\",`email`=\"$email\" WHERE id=\"$id\"";
         $result = $pdo->prepare($sql);
         $result->execute();
         if($result == TRUE){
@@ -26,7 +26,7 @@
     }
     if(isset($_GET['email'])){
         $id = $_GET['email'];
-        $sql = "SELECT * from `users` WHERE email = :email limit 1";
+        $sql = "SELECT * from `listusers` WHERE email = :email limit 1";
         $res = $conn->prepare($sql);
         $res -> bindParam(":email", $id);
         $res->execute();

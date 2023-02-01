@@ -12,31 +12,26 @@
                 $message = '<label>All fields are required</label>';
             }
             else {
-                $sql = "SELECT * FROM users WHERE username = \"$username\" AND password = \"$password\""; 
+                $sql = "SELECT * FROM listusers WHERE username = \"$username\" AND password = \"$password\""; 
                 $result = $pdo->prepare($sql);
                 $result->execute();
                 $count = $result->rowCount();
                 echo "$count";
                 if($count > 0) {
                     $_SESSION["username"] = $_POST["username"];
-                    header("Location: admin_view_users.php");
+                    //header("Location: admin_view_users.php");
+                    header("Location: profile.php");
                 }
                 else {
                     $message = '<label>Worng Data</lable>';
                 }
             }
     }
-?>
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-</head>
 
-<body>
+$title = "My Assignment";                   
+include "./include/header.php";                 
+?>
+
     <div class="contianer mt-2 mb-2">
         <h2 class="display-4 text-center">Login</h2>
         <div class="row justify-content-center">
@@ -70,6 +65,7 @@
             </div>
         </div>
     </div>
-</body>
-
-</html>
+    <?php
+$title = "My Assignment";                   
+include "./include/footer.php";                 
+?>

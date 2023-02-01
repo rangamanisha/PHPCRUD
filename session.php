@@ -6,7 +6,7 @@
         header("location: login.php");
         $pdo = null;
     }
-    $sql = "SELECT * from users where username = \"$user_check\"";
+    $sql = "SELECT * from listusers where username = \"$user_check\"";
     $result = $pdo->prepare($sql);
     $result->execute();
     $user = $result->fetch(PDO::FETCH_ASSOC);

@@ -9,7 +9,7 @@
             header("location: admin_view_users.php");
      }
      include "config.php";
-     $sql = "SELECT * from users";
+     $sql = "SELECT * from listusers";
      $query = $conn->prepare($sql);
      $query->execute();
      $rows=$query->fetchAll();

@@ -17,7 +17,8 @@
             $message = "<label class=\"text-danger\">"."All fields are required"."</label>";
         }
         // query to database after submit button, insert the data
-        $sql = 'insert into users (fullname, username, email, password) values(?,?,?,?)';
+        else{
+            $sql = 'insert into listusers (fullname, username, email, password) values(?,?,?,?)';
         $result = $pdo->prepare($sql);
         $result->execute([$fullname, $username, $email, $password]);
         if($result == TRUE) {
@@ -27,9 +28,15 @@
             $message = "<label class=\"text-danger\">"."Wrong data"."</label>";
             $pdo=null;
         }
+
+        }
+        
     }
 ?>
-
+<?php
+$title = "My Assignment";                   
+include "./include/header.php";                 
+?>
 <!doctype html>
 <html>
 <head>
@@ -56,7 +63,7 @@
 </head>
 <body>
     <div class="contianer mt-2 mb-2">
-    <h2 class="display-2 text-center">Join with us for nirvana</h2>
+    <h2 class="display-2 text-center">Join with us here!</h2>
         <div class="row justify-content-center">
         <div class="col-sm-10 col-md-4 col-lg-4 p-4 ">
         <form id="register-form" action="" method="POST">
@@ -64,22 +71,22 @@
                 <legend>Register for new account</legend>
                 <div class="mb-3">
                     <label for="fullname" class="form-label">Full name</label>
-                    <input id="fullname" class="form-control" type="text" aria-describedby="fullname_help" name="fullname"/>
+                    <input id="fullname" class="form-control" type="text" aria-describedby="fullname_help" name="fullname" required/>
                     <div class="form-text" id="fullname">Enter your full name.</div>
                 </div>
                 <div class="mb-3">
                     <label for="username" class="form-label">Username</label>
-                    <input id="username" class="form-control" type="text" aria-describedby="username_help" name="username"/>
+                    <input id="username" class="form-control" type="text" aria-describedby="username_help" name="username" required/>
                     <div id="username_help" class="form-text">You can use username to login next time.</div>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input id="email" class="form-control" type="email" aria-describedby="email_help" name="email"/>
+                    <input id="email" class="form-control" type="email" aria-describedby="email_help" name="email" required/>
                     <div id="email_help" class="form-text">A verification will be sent to this email</div>
                 </div>
                 <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input id="password" class="form-control" type="password" aria-describedby="password_help" name="password"/>
+                    <input id="password" class="form-control" type="password" aria-describedby="password_help" name="password" required/>
                     <div id="password_help" class="form-text">Choose a strong password</div>
                 </div>
                 <!-- <div class="mb-3">
@@ -95,10 +102,20 @@
                         <button type="submit" class="btn btn-link p-0" name="redirect_to_login">Login</button>
                     </p>
                 </div>
+                
+                <?php
+                if(isset($message)) {
+                            echo "<label class=\"text-danger\">" .$message."</label>";
+                        }
+                        ?>
             </fieldset>
         </form>
         </div>
         </div>
 </div>
+<?php
+$title = "My Assignment";                   
+include "./include/footer.php";                 
+?>
 </body>
 </html>
